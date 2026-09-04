@@ -1,0 +1,6 @@
+entorno_farmacia/
+.env
+scripts/
+backup_dbs/
+archivos/
+__pycache__/

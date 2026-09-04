@@ -1,0 +1,512 @@
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background: #f7f3f3;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.botones button {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgb(217, 222, 238);
+    transition: all 0.3s;
+    white-space: nowrap;
+    min-width: auto;
+}
+
+.botones button:hover {
+    background: #d3dde9;
+    border-color: #999;
+}
+
+.filtros {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.filtros label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.filtros input[type="date"] {
+    padding: 5px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: rgb(217, 222, 238);
+    max-width: 150px;
+}
+
+#grafico-container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden; 
+    box-sizing: border-box; 
+    height: auto;
+}
+
+#grafico-container:hover {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+
+#grafico {
+    width: 100% !important; 
+    max-width: 100% !important;
+    flex: 0 1 auto;
+    height: 480px;
+    min-height: 400px;
+    max-height: 480px;
+    border-radius: 8px;
+    background: #fafafa;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    overflow: hidden !important; 
+    box-sizing: border-box;
+}
+
+#grafico * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#controles-precios {
+    display: none;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#controles-precios input {
+    width: 300px;
+    padding: 5px;
+}
+
+#btn-cargar-mas {
+    display: none;
+    margin: 10px auto;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    border: 1px solid #8E44AD;
+    border-radius: 5px;
+    background: #8E44AD;
+    color: white;
+    transition: all 0.3s;
+}
+
+#btn-cargar-mas:hover {
+    background: #6C3483;
+}
+
+.mensaje-grafico {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    font-size: 18px;
+}
+
+.tabla-precios {
+    padding: 10px;
+}
+
+.tabla-precios h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.tabla-precios table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tabla-precios thead tr {
+    background-color: #8E44AD;
+    color: white;
+}
+
+.tabla-precios th {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.tabla-precios td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: right;
+    font-weight: 500;
+}
+
+.tabla-precios td:first-child {
+    text-align: left;
+}
+
+.tabla-precios .fila-par {
+    background-color: #f9f9f9;
+}
+
+.tabla-precios .fila-impar {
+    background-color: #ffffff;
+}
+
+.tabla-precios .info-registros {
+    text-align: center;
+    margin-top: 15px;
+    color: #7f8c8d;
+    font-size: 13px;
+}
+
+.tabla-precios-scroll {
+    height: 400px;
+    overflow-y: auto;  
+    overflow-x: hidden; 
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.tabla-precios-scroll table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tabla-precios-scroll thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tabla-precios-scroll thead tr {
+    background-color: #8E44AD;
+    color: white;
+}
+
+.tabla-precios-scroll th {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.tabla-precios-scroll td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: right;
+    font-weight: 500;
+}
+
+.tabla-precios-scroll td:first-child {
+    text-align: left;
+}
+
+.tabla-precios-scroll .fila-par {
+    background-color: #f9f9f9;
+}
+
+.tabla-precios-scroll .fila-impar {
+    background-color: #ffffff;
+}
+
+.tabla-precios-scroll .info-registros {
+    text-align: center;
+    margin-top: 10px;
+    color: #7f8c8d;
+    font-size: 13px;
+    padding: 8px 0;
+    background: white;
+    position: sticky;
+    bottom: 0;
+    border-top: 1px solid #eee;
+}
+
+@media (max-width: 768px) {
+    .tabla-precios-scroll {
+        height: 300px;
+    }
+    
+    .tabla-precios-scroll table {
+        font-size: 12px;
+    }
+    
+    .tabla-precios-scroll th,
+    .tabla-precios-scroll td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabla-precios-scroll {
+        height: 250px;
+    }
+    
+    .tabla-precios-scroll table {
+        font-size: 11px;
+    }
+    
+    .tabla-precios-scroll th,
+    .tabla-precios-scroll td {
+        padding: 6px;
+    }
+}
+
+.paginacion-botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-top: 1px solid #eee;
+    min-height: 40px;
+}
+
+.btn-paginacion {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    border: 1px solid #8E44AD;
+    border-radius: 5px;
+    background: #8E44AD;
+    color: white;
+    transition: all 0.3s;
+    min-width: auto;
+}
+
+.btn-paginacion:hover {
+    background: #6C3483;
+    border-color: #6C3483;
+}
+
+.btn-paginacion:active {
+    transform: scale(0.95);
+}
+
+
+@media (min-width: 1400px) {
+    #grafico-container {
+        max-width: 1400px;
+        min-height: 550px;
+        padding: 30px;
+        overflow: hidden;
+    }
+    
+    #grafico {
+        height: 460px;
+        min-height: 400px;
+        max-height: 500px;
+        margin-top: 25px;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    #grafico .plotly,
+    #grafico .js-plotly-plot,
+    #grafico .plotly-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    #grafico-container {
+        max-width: 95%;
+        min-height: 500px;
+        padding: 20px;
+    }
+    
+    #grafico {
+        height: 400px;
+        min-height: 350px;
+        max-height: 450px;
+        margin-top: 15px;
+    }
+
+    .botones {
+        gap: 8px;
+    }
+    
+    .botones button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .btn-paginacion {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: auto;
+    }
+    
+    .filtros {
+        gap: 8px;
+    }
+    
+    .filtros label {
+        font-size: 13px;
+    }
+    
+    .filtros input[type="date"] {
+        max-width: 130px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    #grafico-container {
+        min-height: 450px;
+        padding: 15px;
+        margin: 15px auto;
+    }
+    
+    #grafico {
+        height: 350px;
+        min-height: 300px;
+        max-height: 400px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .botones {
+        gap: 6px;
+        justify-content: center;
+    }
+    
+    .botones button {
+        padding: 5px 10px;
+        font-size: 11px;
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+    
+    .filtros {
+        gap: 6px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .filtros label {
+        font-size: 12px;
+        flex: 0 1 auto;
+    }
+    
+    .filtros input[type="date"] {
+        max-width: 110px;
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+    
+    .filtros button {
+        padding: 4px 10px;
+        font-size: 11px;
+    }
+    
+    .btn-paginacion {
+        padding: 5px 10px;
+        font-size: 11px;
+        min-width: auto;
+    }
+    
+    .paginacion-botones {
+        min-height: 35px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #grafico-container {
+        min-height: 380px;
+        padding: 10px;
+        margin: 10px auto;
+    }
+    
+    #grafico {
+        height: 280px;
+        min-height: 250px;
+        max-height: 320px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .paginacion-botones {
+        gap: 5px;
+        padding: 5px 0;
+        min-height: 30px;
+    }
+    
+    .btn-paginacion {
+        padding: 4px 8px;
+        font-size: 10px;
+        min-width: auto;
+    }
+    
+    .botones button {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .filtros label {
+        font-size: 10px;
+    }
+    
+    .filtros input[type="date"] {
+        max-width: 80px;
+        font-size: 9px;
+        padding: 3px 4px;
+    }
+    
+    .filtros button {
+        padding: 3px 8px;
+        font-size: 9px;
+    }
+}
+
+@media (min-width: 1800px) {
+    #grafico-container {
+        max-width: 1600px;
+        padding: 35px;
+    }
+}

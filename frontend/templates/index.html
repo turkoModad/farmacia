@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+    <div id="authCheck" style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
+        <div style="text-align: center; padding: 50px;">
+            <div style="border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            <h2 style="margin-top: 20px; color: #667eea;">Verificando autenticación...</h2>
+        </div>
+    </div>
+
+    <div id="dashboardContent" style="display: none;">
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+            <button onclick="logout()" style="
+                background: #dc3545;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+                font-size: 14px;
+            ">
+                Cerrar Sesión
+            </button>
+        </div>
+
+        <h1>Farmacia Dashboard</h1>
+        
+        <div class="botones">
+            <button id="btn-diarias">Compras Diarias</button>
+            <button id="btn-compras">Compras Mensuales</button>
+            <button id="btn-anual">Compras Anuales</button>
+            <button id="btn-productos">Productos</button>
+            <button id="btn-precios">Precios</button>
+        </div>
+
+        <div class="filtros">
+            <label>Desde: <input type="date" id="fecha-inicio"></label>
+            <label>Hasta: <input type="date" id="fecha-fin"></label>
+            <button id="btn-aplicar-filtro">Aplicar filtro</button>
+            <button id="btn-limpiar-filtro">Limpiar</button>
+        </div>
+
+        <div id="grafico-container">
+            <div id="grafico"></div>
+        </div>
+
+        <div id="controles-precios">
+            <input list="lista-productos" id="input-producto" placeholder="Escriba el producto...">
+            <datalist id="lista-productos"></datalist>
+            <button id="btn-consultar-precio">Consultar</button>
+        </div>
+    </div>
+
+    <script>
+        var originalFetch = window.fetch;
+        
+        window.fetch = function(url, options) {
+            options = options || {};
+            
+            if (typeof url === 'string' && url.indexOf('/api/') !== -1) {
+                var token = localStorage.getItem('access_token');
+                if (token) {
+                    options.headers = options.headers || {};
+                    options.headers['Authorization'] = 'Bearer ' + token;
+                }
+            }
+            
+            return originalFetch.call(this, url, options);
+        };
+    </script>
+
+    <script src="/static/js/index.js"></script>
+
+    <script>
+        (function() {
+            var token = localStorage.getItem('access_token');
+            
+            if (!token) {
+                window.location.href = '/';
+                return;
+            }
+            
+            fetch('/auth/me', {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Token inválido');
+                }
+                return response.json();
+            })
+            .then(function(user) {
+                document.getElementById('authCheck').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+            })
+            .catch(function(error) {
+                console.error('Error de autenticación:', error);
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('token_type');
+                window.location.href = '/';
+            });
+        })();
+
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('token_type');
+                window.location.href = '/';
+            }
+        }
+
+        var style = document.createElement('style');
+        style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
