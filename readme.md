@@ -2,6 +2,23 @@
 
 **FarmaControl** es una plataforma web diseñada para centralizar la gestión de inventario y optimizar el análisis de ventas en farmacias. El sistema automatiza la recolección, limpieza y consolidación de datos provenientes de archivos Excel y CSV, transformándolos en métricas clave y gráficos interactivos para facilitar la toma de decisiones.
 
+<!-- Badges de Tecnologías y Estado -->
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/FastAPI-Async-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Pandas-ETL-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+  <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge" alt="Status">
+</p>
+
+---
+
+## Índice de Contenidos
+- [Objetivos del Proyecto](#objetivos-del-proyecto)
+- [Características Principales](#características-principales)
+- [Arquitectura Tecnológica](#arquitectura-tecnológica)
+- [Autor](#autor)
+  
 ---
 
 ## Objetivos del Proyecto
@@ -45,3 +62,11 @@
 * **HTML5 y CSS3:** Estructura web y diseño adaptivo (responsive) para dispositivos móviles y de escritorio.
 * **JavaScript (ES6+):** Lógica del cliente, manejo del estado de autenticación y llamadas asíncronas mediante Fetch API.
 * **Plotly.js:** Biblioteca especializada para el renderizado de gráficos estadísticos en el dashboard.
+
+---
+
+## Autor
+
+Desarrollado por **José Aníbal Modad**  
+* **GitHub:** [@turkoModad](https://github.com/turkoModad)
+* **Enfoque:** Desarrollo Full-Stack, Pipelines ETL, APIs de Alto Rendimiento y Analítica de Datos.
